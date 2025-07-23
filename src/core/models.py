@@ -38,7 +38,17 @@
 #     users: list["User"] = Relationship(back_populates="tasks", link_model=UserTask)
 
 
-from src.user.models import UserBase, UserPublic, User
-from src.task.models import UserTask, TaskBase, TaskPublic, TaskCreate, Task
+from src.user.models import UserBase, UserPublic, User, UserCreate
+from src.task.models import (
+    TaskCreateWithUsers,
+    UserTask,
+    TaskBase,
+    TaskPublic,
+    TaskCreate,
+    Task,
+    TaskPublicWithUsers,
+)
 
-TaskPublic.model_rebuild()
+TaskPublic.model_rebuild()  # after all models are loaded we rebuild the model, it is for pydantic
+TaskCreateWithUsers.model_rebuild()
+TaskPublicWithUsers.model_rebuild()

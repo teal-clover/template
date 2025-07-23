@@ -1,6 +1,8 @@
-from sqlmodel import Relationship, SQLModel, Field
+from pydantic import EmailStr
+from sqlmodel import Relationship, Field
 from typing import TYPE_CHECKING
-from src.task.models import UserTask
+from src.core.database import Base
+from src.task.models import TaskPublic, UserTask
 
 if TYPE_CHECKING:
     from src.task.models import Task
@@ -11,12 +13,19 @@ if TYPE_CHECKING:
 #     TODO = "todo"
 
 
-class UserBase(SQLModel):
-    email: str = Field(max_length=100, index=True, unique=True)
+class UserBase(Base):
+    email: EmailStr = Field(max_length=100, index=True, unique=True) # 
 
 
-class UserPublic(SQLModel):
+class UserCreate(UserBase):
     pass
+
+
+class UserPublic(UserBase):
+    id: int
+
+class UserPublicWithUser(UserBase):
+    tasks: list[TaskPublic]
 
 
 class User(UserBase, table=True):
@@ -26,3 +35,6 @@ class User(UserBase, table=True):
         link_model=UserTask,
         sa_relationship_kwargs={"lazy": "selectin"},
     )
+
+# class UserSchema(User, table=False):
+#     pass
