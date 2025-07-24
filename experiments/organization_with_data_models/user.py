@@ -4,8 +4,9 @@ from pydantic import EmailStr
 
 from .mutual import UserTask
 
-if TYPE_CHECKING:
-    from .task import TaskPublic, Task
+# if TYPE_CHECKING:
+#     from .task import TaskPublic, Task
+import organization_with_data_models.task as task
 
 
 class UserPublic(SQLModel):
@@ -14,11 +15,11 @@ class UserPublic(SQLModel):
 
 
 class UserPublicWithTasks(UserPublic):
-    tasks: list["TaskPublic"] = []
+    tasks: list[task.TaskPublic] = []
 
 
 class User(UserPublic, table=True):
-    tasks: list["Task"] = Relationship(
+    tasks: list[task.Task] = Relationship(
         back_populates="users",
         link_model=UserTask,
         sa_relationship_kwargs={"lazy": "selectin"},

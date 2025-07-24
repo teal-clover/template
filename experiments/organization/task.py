@@ -3,7 +3,7 @@ from sqlmodel import Field, Relationship, SQLModel
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from .user import User
+    from .user import User  # type: ignore
 
 
 class Task(SQLModel, table=True):
