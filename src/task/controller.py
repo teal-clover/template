@@ -1,5 +1,5 @@
 from src.core.controller import BaseController
-from src.core.models import Task
+from src.task.models import Task
 from src.task.repository import TaskRepository
 
 

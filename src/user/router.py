@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from src.user.dependencies import UserControllerDep
-from src.core.models import User, UserCreate, UserPublic
+from src.user.models import User, UserCreate, UserPublic
 
 
 router = APIRouter(tags=["users"], prefix="/users")

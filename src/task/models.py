@@ -43,3 +43,8 @@ class Task(TaskBase, table=True):
         link_model=UserTask,
         sa_relationship_kwargs={"lazy": "selectin"},
     )
+
+
+from src.user.models import UserPublic  # noqa: E402
+TaskPublicWithUsers.model_rebuild()
+

@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from src.task.dependencies import TaskControllerDep
-from src.core.models import Task, TaskCreate, TaskPublicWithUsers
+from src.task.models import Task, TaskCreate, TaskPublicWithUsers
 # from src.task.models import Task, TaskCreateWithUsers, TaskPublicWithUsers
 
 # def create_router

@@ -4,9 +4,9 @@ from typing import TypeVar, Generic, Type, Optional, List
 from sqlmodel import select
 from src.core.database import Base
 from src.core.dependencies import DBSessionDep
-from src.task.models import TaskPublic
 
-T = TypeVar("T", bound=TaskPublic)
+T = TypeVar("T", bound=Base)
+
 
 class BaseRepository(Generic[T]):
     def __init__(self, model: Type[T], session: DBSessionDep):
@@ -18,10 +18,11 @@ class BaseRepository(Generic[T]):
             select(self.model).where(getattr(self.model, "id") == item_id)
         )
         return result.one()
-        
 
     async def get_all(self) -> List[T]:
-        result = (await self.session.exec(select(self.model))).all() # returns a sequence
+        result = (
+            await self.session.exec(select(self.model))
+        ).all()  # returns a sequence
         return list(result)
 
     async def create(self, item: T) -> T:

@@ -1,5 +1,5 @@
 from src.core.controller import BaseController
-from src.core.models import User
+from src.user.models import User
 from src.user.repository import UserRepository
 
 
